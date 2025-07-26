@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>¿Qué comemos hoy?</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background-color: #fffaf0;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.2rem;
+      color: #444;
+    }
+    .opciones {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+      gap: 20px;
+    }
+    .opcion {
+      border: 2px solid #c24a00;
+      border-radius: 15px;
+      padding: 15px;
+      width: 180px;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .opcion:hover {
+      transform: scale(1.05);
+    }
+    .opcion img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .opcion h2 {
+      font-size: 1.2rem;
+      margin: 10px 0 0;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>¿Qué comemos hoy?</h1>
+  <p>Elegí tu menú preferido 👇</p>
+
+  <div class="opciones">
+    <a href="https://1967-ROB.github.io/precios-alorico-hamb-lomito" target="_blank">
+      <div class="opcion">
+        <img src="img/lomito.jpg" alt="Lomitos">
+        <h2>Lomitos & Hamburguesas</h2>
+      </div>
+    </a>
+    <a href="https://1967-ROB.github.io/precios-alorico/" target="_blank">
+      <div class="opcion">
+        <img src="img/pizza.jpg" alt="Pizzas">
+        <h2>Pizzas</h2>
+      </div>
+    </a>
+  </div>
+
+</body>
+</html>
