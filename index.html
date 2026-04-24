@@ -88,13 +88,26 @@
     <img src="Repartidor.png" alt="Repartidor" class="icono" />
   </header>
 
- <div class="botones">
-  <a class="boton" href="https://menu-principal-alo-rico.netlify.app/pizzas/">🍕 Menú de Pizzas</a>
-  <a class="boton" href="https://menu-principal-alo-rico.netlify.app/lomitos/">🥩 Menú de Lomitos</a>
-  <a class="boton" href="https://menu-principal-alo-rico.netlify.app/bebidas/">🥤 Menú de Bebidas</a>
-  <a class="boton" href="https://menu-principal-alo-rico.netlify.app/hamburguesas/">🍔 Menú de Hamburguesas</a>
+<div class="botones">
+  <a class="boton" id="btnPizza">🍕 Menú de Pizzas</a>
+  <a class="boton" id="btnLomitos">🥩 Menú de Lomitos</a>
+  <a class="boton" id="btnBebidas">🥤 Menú de Bebidas</a>
+  <a class="boton" id="btnHamburguesas">🍔 Menú de Hamburguesas</a>
 </div>
 
+<script>
+  document.getElementById("btnPizza").onclick = () => 
+    window.location.href = 'https://menu-principal-alo-rico.netlify.app/pizzas/';
+
+  document.getElementById("btnLomitos").onclick = () => 
+    window.location.href = 'https://menu-principal-alo-rico.netlify.app/lomitos/';
+
+  document.getElementById("btnBebidas").onclick = () => 
+    window.location.href = 'https://menu-principal-alo-rico.netlify.app/bebidas/';
+
+  document.getElementById("btnHamburguesas").onclick = () => 
+    window.location.href = 'https://menu-principal-alo-rico.netlify.app/hamburguesas/';
+</script>
 
   
   
