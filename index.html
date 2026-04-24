@@ -3,18 +3,122 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Alo Rico - ¿Qué comemos hoy?</title>
-  <link rel="stylesheet" href="style-menu-principal.css" />
+  <title>¿Qué comemos hoy? | Alo Rico</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8ec;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      margin: 20px 0 10px;
+    }
+    header img.logo {
+      width: 120px;
+      height: auto;
+    }
+    header h1 {
+      font-size: 32px;
+      color: #c24a00;
+      margin: 10px 0 5px;
+    }
+    header img.icono {
+      width: 60px;
+      height: auto;
+      margin-top: 5px;
+    }
+    .botones {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 30px;
+    }
+    .boton {
+      background-color: #ff8c00;
+      color: white;
+      font-size: 20px;
+      padding: 20px 40px;
+      border: none;
+      border-radius: 15px;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s, background-color 0.3s;
+    }
+    .boton:hover {
+      transform: scale(1.05);
+      background-color: #e67500;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #888;
+    }
+    /* ✅ Mensaje flotante con parpadeo */
+    #mensaje-pedido {
+      display: none;
+      position: fixed;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffcc00;
+      color: #000;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 9999;
+      animation: parpadeo 1.5s infinite;
+    }
+
+    @keyframes parpadeo {
+      0% { background-color: #ffcc00; }
+      50% { background-color: #ff9900; }
+      100% { background-color: #ffcc00; }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <img src="logo.png" alt="Logo Alo Rico" class="logo animar" />
-    <h1 class="animar">¿Qué comemos hoy?</h1>
-    <div class="button-container animar">
-      <a href="https://1967-ROB.github.io/precios-alo-rico/" class="menu-button">🍕 Pizzas</a>
-      <a href="https://1967-ROB.github.io/precios-alorico-hamb-lomito/" class="menu-button">🥪 Lomitos & Hamburguesas</a>
-    </div>
-    <img src="Repartidor.png" alt="Repartidor Alo Rico" class="repartidor animar" />
+  <header>
+    <img src="logo.png" alt="Logo Alo Rico" class="logo" />
+    <h1>¿Qué comemos hoy?</h1>
+    <img src="Repartidor.png" alt="Repartidor" class="icono" />
+  </header>
+
+  <div class="botones">
+    <a class="boton" href="pizzas/index.html">🍕 Menú de Pizzas</a>
+    <a class="boton" href="lomitos/index.html">🥩 Menú de Lomitos</a>
+    <a class="boton" href="bebidas/index.html">🥤 Menú de Bebidas</a>
+    <a class="boton" href="hamburguesas/index.html">🍔 Menú de Hamburguesas</a>
   </div>
+
+  <footer>
+    © Alo Rico 2025 - Desarrollado por Pucón Personalizados
+  </footer>
+
+  <!-- ✅ Mensaje flotante -->
+  <div id="mensaje-pedido">📦 Tienes pedidos pendientes - Ver mis pedidos</div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // ✅ Leer carrito y calcular total
+      const carrito = JSON.parse(localStorage.getItem("carritoPedido")) || [];
+      const totalPedido = carrito.reduce((sum, p) => sum + (p.precio || 0), 0);
+      const mensaje = document.getElementById("mensaje-pedido");
+
+      if (totalPedido > 0) {
+        mensaje.style.display = "block";
+      }
+
+      // ✅ Al hacer clic, marcar para abrir pedido y redirigir a lomitos
+      mensaje.addEventListener("click", () => {
+        localStorage.setItem("abrirPedido", "1");
+        window.location.href = "lomitos/index.html";
+      });
+    });
+  </script>
 </body>
 </html>
