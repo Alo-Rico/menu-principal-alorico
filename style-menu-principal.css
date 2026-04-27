@@ -2,72 +2,111 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", sans-serif;
-  background-color: #fff8ed;
+  background: linear-gradient(180deg, #fff8ed, #ffe6cc);
   text-align: center;
 }
 
 .container {
-  padding: 30px 20px;
+  padding: 25px 15px;
+  max-width: 500px;
+  margin: auto;
 }
 
 .logo {
-  max-width: 180px;
-  margin-bottom: 20px;
+  max-width: 160px;
+  margin-bottom: 15px;
 }
 
 h1 {
-  font-size: 26px;
+  font-size: 24px;
   color: #333;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
+/* 🔥 CONTEXTO (nuevo) */
+#contexto-box {
+  display: none;
+  background: #fff3d6;
+  padding: 10px;
+  margin: 10px auto;
+  border-radius: 10px;
+  font-weight: bold;
+  color: #c24a00;
+  max-width: 300px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+/* 🔥 BOTONES CONTENEDOR */
 .button-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   align-items: center;
 }
 
+/* 🔥 BOTONES MEJORADOS */
 .menu-button {
-  background-color: #ff5e00;
+  background: linear-gradient(135deg, #ff7a00, #ff4d00);
   color: white;
   text-decoration: none;
-  padding: 15px 30px;
-  border-radius: 12px;
-  font-size: 18px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
-  width: 250px;
+  padding: 16px 25px;
+  border-radius: 14px;
+  font-size: 17px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease;
+  width: 90%;
+  max-width: 280px;
+  display: block;
 }
 
+/* Hover más moderno */
 .menu-button:hover {
-  background-color: #e24e00;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #ff6a00, #e64500);
 }
 
+/* Click efecto táctil */
+.menu-button:active {
+  transform: scale(0.97);
+}
+
+/* 🔴 BOTÓN MOZO */
+#btn-mozo {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 9999;
+}
+
+/* ✨ REPARTIDOR */
 .repartidor {
-  max-width: 180px;
-  margin-top: 30px;
+  max-width: 160px;
+  margin-top: 25px;
+  opacity: 0.9;
 }
 
-/* Animación suave */
+/* ✨ ANIMACIONES MEJORADAS */
 .animar {
   opacity: 0;
-  transform: translateY(30px);
-  animation: aparecer 0.8s ease-out forwards;
+  transform: translateY(25px);
+  animation: aparecer 0.6s ease-out forwards;
 }
 
-.animar:nth-child(1) {
-  animation-delay: 0.2s;
-}
-.animar:nth-child(2) {
-  animation-delay: 0.4s;
-}
-.animar:nth-child(3) {
-  animation-delay: 0.6s;
-}
-.animar:nth-child(4) {
-  animation-delay: 0.8s;
-}
+.animar:nth-child(1) { animation-delay: 0.15s; }
+.animar:nth-child(2) { animation-delay: 0.3s; }
+.animar:nth-child(3) { animation-delay: 0.45s; }
+.animar:nth-child(4) { animation-delay: 0.6s; }
 
 @keyframes aparecer {
   to {
