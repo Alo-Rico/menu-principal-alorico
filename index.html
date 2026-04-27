@@ -1,143 +1,179 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>¿Qué comemos hoy? | Alo Rico</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alo Rico</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fff8ec;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
 
-    header {
-      margin: 20px 0 10px;
-    }
+body {
+  background: linear-gradient(180deg, #0f0f0f, #1a1a1a);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-    header img.logo {
-      width: 120px;
-      height: auto;
-    }
+/* CONTENEDOR */
+.app {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+}
 
-    header h1 {
-      font-size: 32px;
-      color: #c24a00;
-      margin: 10px 0 5px;
-    }
+/* LOGO */
+.logo {
+  text-align: center;
+  margin-bottom: 25px;
+}
 
-    header img.icono {
-      width: 60px;
-      height: auto;
-      margin-top: 5px;
-    }
+.logo img {
+  width: 120px;
+}
 
-    .botones {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 30px;
-    }
+/* TITULO */
+.title {
+  text-align: center;
+  margin-bottom: 25px;
+}
 
-    .boton {
-      background-color: #ff8c00;
-      color: white;
-      font-size: 20px;
-      padding: 20px 40px;
-      border: none;
-      border-radius: 15px;
-      text-decoration: none;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: transform 0.2s, background-color 0.3s;
-    }
+.title h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
 
-    .boton:hover {
-      transform: scale(1.05);
-      background-color: #e67500;
-    }
+.title p {
+  font-size: 14px;
+  color: #aaa;
+}
 
-    footer {
-      margin-top: 30px;
-      font-size: 14px;
-      color: #888;
-    }
+/* BOTONES */
+.option {
+  background: #1f1f1f;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid #2a2a2a;
+  text-decoration: none;
+  color: white;
+}
 
-    /* MENSAJE FLOTANTE */
-    #mensaje-pedido {
-      display: none;
-      position: fixed;
-      bottom: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ffcc00;
-      color: #000;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      cursor: pointer;
-      z-index: 9999;
-      animation: parpadeo 1.5s infinite;
-    }
+.option:hover {
+  transform: scale(1.02);
+  border-color: #ff7a00;
+}
 
-    @keyframes parpadeo {
-      0% { background-color: #ffcc00; }
-      50% { background-color: #ff9900; }
-      100% { background-color: #ffcc00; }
-    }
-  </style>
+.option.primary {
+  background: linear-gradient(90deg, #ff7a00, #ff3c00);
+  border: none;
+}
+
+.text h3 {
+  font-size: 16px;
+}
+
+.text p {
+  font-size: 12px;
+  color: #bbb;
+}
+
+.icon {
+  font-size: 24px;
+}
+
+.arrow {
+  font-size: 18px;
+  color: #888;
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+
+/* ANIMACION */
+.app {
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+</style>
+
 </head>
-
 <body>
 
-  <header>
-    <img src="logo.png" alt="Logo Alo Rico" class="logo" />
-    <h1>¿Qué comemos hoy?</h1>
-    <img src="Repartidor.png" alt="Repartidor" class="icono" />
-  </header>
+<div class="app">
 
-  <div class="botones">
-
-    <!-- NUEVAS OPCIONES PRINCIPALES -->
-    <a class="boton" href="mesa.html">🪑 Estoy en el local</a>
-    <a class="boton" href="menu.html">🛍️ Quiero retirar</a>
-    <a class="boton" href="menu.html">🏠 Delivery</a>
-
-    <!-- MENÚS ACTUALES -->
-    <a class="boton" href="pizzas/index.html">🍕 Menú de Pizzas</a>
-    <a class="boton" href="lomitos/index.html">🥩 Menú de Lomitos</a>
-    <a class="boton" href="bebidas/index.html">🥤 Menú de Bebidas</a>
-    <a class="boton" href="hamburguesas/index.html">🍔 Menú de Hamburguesas</a>
-
+  <!-- LOGO -->
+  <div class="logo">
+    <img src="logo.png" alt="Alo Rico">
   </div>
 
-  <footer>
-    © Alo Rico 2025 - Desarrollado por Pucón Personalizados
-  </footer>
+  <!-- TITULO -->
+  <div class="title">
+    <h2>¿Cómo querés pedir?</h2>
+    <p>Elegí una opción para continuar</p>
+  </div>
 
-  <!-- MENSAJE FLOTANTE -->
-  <div id="mensaje-pedido">📦 Tienes pedidos pendientes - Ver mis pedidos</div>
+  <!-- OPCIONES -->
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const carrito = JSON.parse(localStorage.getItem("carritoPedido")) || [];
-      const totalPedido = carrito.reduce((sum, p) => sum + (p.precio || 0), 0);
-      const mensaje = document.getElementById("mensaje-pedido");
+  <a class="option primary" href="mesa.html">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div class="icon">🪑</div>
+      <div class="text">
+        <h3>Estoy en el local</h3>
+        <p>Pedir desde la mesa</p>
+      </div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
 
-      if (totalPedido > 0) {
-        mensaje.style.display = "block";
-      }
+  <a class="option" href="menu.html">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div class="icon">🛍️</div>
+      <div class="text">
+        <h3>Quiero retirar</h3>
+        <p>Pasar a buscar</p>
+      </div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
 
-      mensaje.addEventListener("click", () => {
-        localStorage.setItem("abrirPedido", "1");
-        window.location.href = "lomitos/index.html";
-      });
-    });
-  </script>
+  <a class="option" href="menu.html">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div class="icon">🏠</div>
+      <div class="text">
+        <h3>Delivery</h3>
+        <p>Recibir en casa</p>
+      </div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <div class="footer">
+    Alo Rico © 2026
+  </div>
+
+</div>
 
 </body>
 </html>
