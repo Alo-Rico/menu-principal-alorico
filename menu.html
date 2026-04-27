@@ -1,17 +1,236 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Menú</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menú - Alo Rico</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f0f;
+  color: white;
+}
+
+.app {
+  max-width: 420px;
+  margin: auto;
+  padding: 15px;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header img {
+  width: 90px;
+}
+
+.modo {
+  font-size: 12px;
+  border: 1px solid #ff7a00;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+/* CATEGORIAS */
+.categorias {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  overflow-x: auto;
+}
+
+.cat {
+  padding: 8px 12px;
+  border-radius: 20px;
+  background: #1a1a1a;
+  font-size: 12px;
+  cursor: pointer;
+  border: 1px solid #2a2a2a;
+}
+
+.cat.active {
+  border-color: #ff7a00;
+  color: #ff7a00;
+}
+
+/* PRODUCTOS */
+.producto {
+  display: flex;
+  background: #1a1a1a;
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.producto img {
+  width: 80px;
+  border-radius: 10px;
+}
+
+.info {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.precio {
+  color: #ff7a00;
+  font-weight: bold;
+}
+
+.add {
+  background: #ff7a00;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* FOOTER */
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+}
+
+.pedido {
+  flex: 1;
+  background: #222;
+  padding: 12px;
+  text-align: center;
+}
+
+.mozo {
+  flex: 1;
+  background: #e53935;
+  padding: 12px;
+  text-align: center;
+}
+
+.spacer {
+  height: 80px;
+}
+</style>
 </head>
-<body style="background:#111; color:white; text-align:center;">
 
-  <h1>🛍️ MENÚ FUNCIONANDO</h1>
-  <p>Retiro / Delivery OK</p>
+<body>
 
-  <br><br>
+<div class="app">
 
-  <a href="index.html" style="color:orange;">⬅ Volver al inicio</a>
+  <!-- HEADER -->
+  <div class="header">
+    <img src="logo.png">
+    <div class="modo">Delivery</div>
+  </div>
+
+  <!-- CATEGORIAS -->
+  <div class="categorias" id="categorias"></div>
+
+  <!-- PRODUCTOS -->
+  <div id="productos"></div>
+
+  <div class="spacer"></div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="pedido" onclick="verPedido()">🛒 Ver pedido (Gs. <span id="total">0</span>)</div>
+  <div class="mozo">📞 Contacto</div>
+</div>
+
+<script>
+const productosData = [
+  {cat:"hamburguesas", nombre:"Clásica", precio:28000, img:"burger1.jpg"},
+  {cat:"hamburguesas", nombre:"Doble Smash", precio:36000, img:"burger2.jpg"},
+  {cat:"pizzas", nombre:"Muzzarella", precio:45000, img:"burger1.jpg"},
+  {cat:"bebidas", nombre:"Coca Cola", precio:10000, img:"burger2.jpg"}
+];
+
+let carrito = [];
+let categoriaActiva = "hamburguesas";
+
+/* CATEGORIAS */
+const categorias = ["hamburguesas","pizzas","bebidas"];
+
+const catContainer = document.getElementById("categorias");
+
+categorias.forEach(c=>{
+  const div = document.createElement("div");
+  div.className = "cat";
+  div.innerText = c;
+  div.onclick = () => {
+    categoriaActiva = c;
+    render();
+  };
+  catContainer.appendChild(div);
+});
+
+/* RENDER */
+function render(){
+  document.getElementById("productos").innerHTML = "";
+  
+  document.querySelectorAll(".cat").forEach(el=>{
+    el.classList.toggle("active", el.innerText === categoriaActiva);
+  });
+
+  productosData
+    .filter(p=>p.cat===categoriaActiva)
+    .forEach(p=>{
+      const div = document.createElement("div");
+      div.className = "producto";
+      div.innerHTML = `
+        <img src="${p.img}">
+        <div class="info">
+          <h3>${p.nombre}</h3>
+          <div class="precio">Gs. ${p.precio}</div>
+        </div>
+        <div class="add">+</div>
+      `;
+
+      div.querySelector(".add").onclick = ()=>{
+        carrito.push(p);
+        actualizarTotal();
+      };
+
+      document.getElementById("productos").appendChild(div);
+    });
+}
+
+/* TOTAL */
+function actualizarTotal(){
+  const total = carrito.reduce((sum,p)=>sum+p.precio,0);
+  document.getElementById("total").innerText = total;
+}
+
+/* WHATSAPP */
+function verPedido(){
+  if(carrito.length===0){
+    alert("Carrito vacío");
+    return;
+  }
+
+  let mensaje = "Pedido:\n";
+  carrito.forEach(p=>{
+    mensaje += "- " + p.nombre + "\n";
+  });
+
+  const url = "https://wa.me/595XXXXXXXXX?text=" + encodeURIComponent(mensaje);
+  window.open(url);
+}
+
+render();
+</script>
 
 </body>
 </html>
