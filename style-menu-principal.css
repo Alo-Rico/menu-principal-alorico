@@ -1,116 +1,130 @@
 body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: #fff;
   margin: 0;
   padding: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: linear-gradient(180deg, #fff8ed, #ffe6cc);
+  color: #1a1a1a;
+}
+
+/* HEADER */
+header {
+  padding: 20px 15px 10px;
   text-align: center;
+  background: white;
 }
 
-.container {
-  padding: 25px 15px;
-  max-width: 500px;
-  margin: auto;
+header img.logo {
+  width: 110px;
 }
 
-.logo {
-  max-width: 160px;
+header h1 {
+  font-size: 22px;
+  margin: 10px 0 5px;
+  font-weight: 700;
+}
+
+header img.icono {
+  width: 50px;
+  opacity: 0.8;
+}
+
+/* PANTALLA */
+.pantalla-inicial {
+  padding: 20px;
+}
+
+.pantalla-inicial h2 {
+  font-size: 18px;
   margin-bottom: 15px;
+  text-align: left;
 }
 
-h1 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 25px;
+/* OPCIONES TIPO APP */
+.opcion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 18px;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* 🔥 CONTEXTO (nuevo) */
-#contexto-box {
-  display: none;
-  background: #fff3d6;
-  padding: 10px;
-  margin: 10px auto;
-  border-radius: 10px;
-  font-weight: bold;
-  color: #c24a00;
-  max-width: 300px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+.opcion:hover {
+  transform: translateY(-2px);
 }
 
-/* 🔥 BOTONES CONTENEDOR */
-.button-container {
+.opcion span {
+  font-size: 22px;
+  margin-right: 10px;
+}
+
+/* MENÚ */
+.botones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 15px;
+}
+
+/* CARDS DE MENÚ */
+.boton {
+  background: white;
+  border-radius: 16px;
+  padding: 15px;
+  text-decoration: none;
+  color: #000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
-  gap: 15px;
   align-items: center;
+  justify-content: center;
+  height: 120px;
+  transition: all 0.2s ease;
 }
 
-/* 🔥 BOTONES MEJORADOS */
-.menu-button {
-  background: linear-gradient(135deg, #ff7a00, #ff4d00);
-  color: white;
-  text-decoration: none;
-  padding: 16px 25px;
-  border-radius: 14px;
-  font-size: 17px;
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
-  transition: all 0.25s ease;
-  width: 90%;
-  max-width: 280px;
-  display: block;
+.boton:hover {
+  transform: translateY(-2px);
 }
 
-/* Hover más moderno */
-.menu-button:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(135deg, #ff6a00, #e64500);
+/* ICONO GRANDE */
+.boton .icono {
+  font-size: 32px;
+  margin-bottom: 8px;
 }
 
-/* Click efecto táctil */
-.menu-button:active {
-  transform: scale(0.97);
+/* TEXTO */
+.boton span {
+  font-size: 14px;
+  font-weight: 600;
 }
 
-/* 🔴 BOTÓN MOZO */
-#btn-mozo {
+/* FOOTER */
+footer {
+  margin: 20px 0;
+  font-size: 12px;
+  color: #999;
+}
+
+/* PEDIDO FLOTANTE */
+#mensaje-pedido {
   display: none;
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #e53935;
-  color: white;
-  border: none;
-  padding: 14px 18px;
-  border-radius: 50px;
-  font-size: 14px;
-  font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff2e00;
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 30px;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
   cursor: pointer;
   z-index: 9999;
-}
-
-/* ✨ REPARTIDOR */
-.repartidor {
-  max-width: 160px;
-  margin-top: 25px;
-  opacity: 0.9;
-}
-
-/* ✨ ANIMACIONES MEJORADAS */
-.animar {
-  opacity: 0;
-  transform: translateY(25px);
-  animation: aparecer 0.6s ease-out forwards;
-}
-
-.animar:nth-child(1) { animation-delay: 0.15s; }
-.animar:nth-child(2) { animation-delay: 0.3s; }
-.animar:nth-child(3) { animation-delay: 0.45s; }
-.animar:nth-child(4) { animation-delay: 0.6s; }
-
-@keyframes aparecer {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
