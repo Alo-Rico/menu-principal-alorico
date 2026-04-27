@@ -7,114 +7,133 @@
 
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #fff8ec, #ffe0c2);
-      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #fff;
       margin: 0;
       padding: 0;
+      color: #1a1a1a;
     }
 
+    /* HEADER */
     header {
-      margin: 20px 0 10px;
+      padding: 20px 15px 10px;
+      text-align: center;
+      background: white;
     }
 
     header img.logo {
-      width: 120px;
+      width: 110px;
     }
 
     header h1 {
-      font-size: 28px;
-      color: #c24a00;
+      font-size: 22px;
       margin: 10px 0 5px;
+      font-weight: 700;
     }
 
     header img.icono {
-      width: 60px;
-      margin-top: 5px;
+      width: 50px;
+      opacity: 0.8;
     }
 
-    /* 🔥 PANTALLA INICIAL */
+    /* PANTALLA INICIAL */
     .pantalla-inicial {
       padding: 20px;
     }
 
     .pantalla-inicial h2 {
-      margin-bottom: 20px;
-      color: #333;
+      font-size: 18px;
+      margin-bottom: 15px;
+      text-align: left;
     }
 
+    /* OPCIONES */
     .opcion {
-      width: 90%;
-      max-width: 300px;
-      margin: 10px auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
       padding: 18px;
-      border-radius: 15px;
+      border-radius: 16px;
+      margin-bottom: 12px;
       border: none;
+      width: 100%;
       font-size: 16px;
-      background: linear-gradient(135deg, #ff7a00, #ff4d00);
-      color: white;
-      box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       cursor: pointer;
-      transition: 0.2s;
+      transition: all 0.2s ease;
     }
 
     .opcion:hover {
-      transform: scale(1.03);
+      transform: translateY(-2px);
     }
 
-    /* 🔥 MENÚ */
+    .opcion span {
+      font-size: 22px;
+      margin-right: 10px;
+    }
+
+    /* MENÚ */
     .botones {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 15px;
     }
 
+    /* CARDS */
     .boton {
-      background-color: #ff8c00;
-      color: white;
-      font-size: 20px;
-      padding: 20px 40px;
-      border-radius: 15px;
+      background: white;
+      border-radius: 16px;
+      padding: 15px;
       text-decoration: none;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: transform 0.2s, background-color 0.3s;
+      color: #000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 120px;
+      transition: all 0.2s ease;
     }
 
     .boton:hover {
-      transform: scale(1.05);
-      background-color: #e67500;
+      transform: translateY(-2px);
     }
 
-    footer {
-      margin-top: 30px;
+    .boton .icono {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .boton span {
       font-size: 14px;
-      color: #888;
+      font-weight: 600;
     }
 
-    /* ✅ MENSAJE PEDIDO */
+    /* FOOTER */
+    footer {
+      margin: 20px 0;
+      font-size: 12px;
+      color: #999;
+      text-align: center;
+    }
+
+    /* PEDIDO FLOTANTE */
     #mensaje-pedido {
       display: none;
       position: fixed;
       bottom: 15px;
       left: 50%;
       transform: translateX(-50%);
-      background: #ffcc00;
-      color: #000;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      background: #ff2e00;
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 30px;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
       cursor: pointer;
       z-index: 9999;
-      animation: parpadeo 1.5s infinite;
-    }
-
-    @keyframes parpadeo {
-      0% { background-color: #ffcc00; }
-      50% { background-color: #ff9900; }
-      100% { background-color: #ffcc00; }
     }
   </style>
 </head>
@@ -127,41 +146,60 @@
   <img src="Repartidor.png" class="icono">
 </header>
 
-<!-- 🔥 PANTALLA INICIAL -->
+<!-- PANTALLA INICIAL -->
 <div id="pantalla-inicial" class="pantalla-inicial">
   <h2>¿Cómo querés pedir?</h2>
 
   <button class="opcion" onclick="seleccionar('local')">
-    🍽️ Estoy en el local
+    <div><span>🍽️</span> Estoy en el local</div>
+    ➜
   </button>
 
   <button class="opcion" onclick="seleccionar('calle')">
-    🛍️ Quiero retirar
+    <div><span>🛍️</span> Quiero retirar</div>
+    ➜
   </button>
 
   <button class="opcion" onclick="seleccionar('casa')">
-    🏠 Estoy en casa
+    <div><span>🏠</span> Estoy en casa</div>
+    ➜
   </button>
 </div>
 
-<!-- 🔥 MENÚ ORIGINAL (NO TOCADO) -->
+<!-- MENÚ -->
 <div id="menu-principal" class="botones">
-  <a class="boton" href="pizzas/index.html">🍕 Menú de Pizzas</a>
-  <a class="boton" href="lomitos/index.html">🥩 Menú de Lomitos</a>
-  <a class="boton" href="bebidas/index.html">🥤 Menú de Bebidas</a>
-  <a class="boton" href="hamburguesas/index.html">🍔 Menú de Hamburguesas</a>
+
+  <a class="boton" href="pizzas/index.html">
+    <div class="icono">🍕</div>
+    <span>Pizzas</span>
+  </a>
+
+  <a class="boton" href="lomitos/index.html">
+    <div class="icono">🥩</div>
+    <span>Lomitos</span>
+  </a>
+
+  <a class="boton" href="bebidas/index.html">
+    <div class="icono">🥤</div>
+    <span>Bebidas</span>
+  </a>
+
+  <a class="boton" href="hamburguesas/index.html">
+    <div class="icono">🍔</div>
+    <span>Hamburguesas</span>
+  </a>
+
 </div>
 
 <footer>
   © Alo Rico 2026 - Desarrollado por Pucón Personalizados
 </footer>
 
-<div id="mensaje-pedido">📦 Tienes pedidos pendientes - Ver mis pedidos</div>
+<div id="mensaje-pedido">📦 Ver mi pedido</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  // 🔥 DETECCIÓN QR
   const params = new URLSearchParams(window.location.search);
   const origenQR = params.get("origen");
 
@@ -177,7 +215,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("menu-principal").style.display = "none";
   }
 
-  // ✅ CARRITO (NO TOCADO)
   const carrito = JSON.parse(localStorage.getItem("carritoPedido")) || [];
   const totalPedido = carrito.reduce((sum, p) => sum + (p.precio || 0), 0);
   const mensaje = document.getElementById("mensaje-pedido");
@@ -193,12 +230,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-// 🔥 SELECCIÓN MANUAL
 function seleccionar(tipo) {
   localStorage.setItem("origen", tipo);
 
   document.getElementById("pantalla-inicial").style.display = "none";
-  document.getElementById("menu-principal").style.display = "flex";
+  document.getElementById("menu-principal").style.display = "grid";
 }
 </script>
 
