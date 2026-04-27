@@ -1,240 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>¿Qué comemos hoy? | Alo Rico</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alo Rico</title>
 
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: #fff;
-      margin: 0;
-      padding: 0;
-      color: #1a1a1a;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
 
-    /* HEADER */
-    header {
-      padding: 20px 15px 10px;
-      text-align: center;
-      background: white;
-    }
+body {
+  background: linear-gradient(180deg, #0f0f0f, #1a1a1a);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-    header img.logo {
-      width: 110px;
-    }
+/* CONTENEDOR PRINCIPAL */
+.app {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+}
 
-    header h1 {
-      font-size: 22px;
-      margin: 10px 0 5px;
-      font-weight: 700;
-    }
+/* LOGO */
+.logo {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
-    header img.icono {
-      width: 50px;
-      opacity: 0.8;
-    }
+.logo h1 {
+  font-size: 28px;
+  letter-spacing: 2px;
+}
 
-    /* PANTALLA INICIAL */
-    .pantalla-inicial {
-      padding: 20px;
-    }
+.logo span {
+  color: #ff7a00;
+  font-weight: bold;
+}
 
-    .pantalla-inicial h2 {
-      font-size: 18px;
-      margin-bottom: 15px;
-      text-align: left;
-    }
+/* TITULO */
+.title {
+  text-align: center;
+  margin-bottom: 25px;
+}
 
-    /* OPCIONES */
-    .opcion {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: white;
-      padding: 18px;
-      border-radius: 16px;
-      margin-bottom: 12px;
-      border: none;
-      width: 100%;
-      font-size: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
+.title h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
 
-    .opcion:hover {
-      transform: translateY(-2px);
-    }
+.title p {
+  font-size: 14px;
+  color: #aaa;
+}
 
-    .opcion span {
-      font-size: 22px;
-      margin-right: 10px;
-    }
+/* BOTONES */
+.option {
+  background: #1f1f1f;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid #2a2a2a;
+}
 
-    /* MENÚ */
-    .botones {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      padding: 15px;
-    }
+.option:hover {
+  transform: scale(1.02);
+  border-color: #ff7a00;
+}
 
-    /* CARDS */
-    .boton {
-      background: white;
-      border-radius: 16px;
-      padding: 15px;
-      text-decoration: none;
-      color: #000;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 120px;
-      transition: all 0.2s ease;
-    }
+/* BOTON PRINCIPAL */
+.option.primary {
+  background: linear-gradient(90deg, #ff7a00, #ff3c00);
+  border: none;
+}
 
-    .boton:hover {
-      transform: translateY(-2px);
-    }
+.option.primary .text p {
+  color: #fff;
+}
 
-    .boton .icono {
-      font-size: 32px;
-      margin-bottom: 8px;
-    }
+.icon {
+  font-size: 26px;
+}
 
-    .boton span {
-      font-size: 14px;
-      font-weight: 600;
-    }
+.text h3 {
+  font-size: 16px;
+}
 
-    /* FOOTER */
-    footer {
-      margin: 20px 0;
-      font-size: 12px;
-      color: #999;
-      text-align: center;
-    }
+.text p {
+  font-size: 12px;
+  color: #bbb;
+}
 
-    /* PEDIDO FLOTANTE */
-    #mensaje-pedido {
-      display: none;
-      position: fixed;
-      bottom: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ff2e00;
-      color: #fff;
-      padding: 14px 22px;
-      border-radius: 30px;
-      font-weight: 600;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-      cursor: pointer;
-      z-index: 9999;
-    }
-  </style>
+.arrow {
+  font-size: 18px;
+  color: #888;
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+
+/* ANIMACION */
+.app {
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+</style>
+
 </head>
-
 <body>
 
-<header>
-  <img src="logo.png" class="logo">
-  <h1>¿Qué comemos hoy?</h1>
-  <img src="Repartidor.png" class="icono">
-</header>
+<div class="app">
 
-<!-- PANTALLA INICIAL -->
-<div id="pantalla-inicial" class="pantalla-inicial">
-  <h2>¿Cómo querés pedir?</h2>
+  <div class="logo">
+    <h1>🔥 <span>ALO RICO</span></h1>
+  </div>
 
-  <button class="opcion" onclick="seleccionar('local')">
-    <div><span>🍽️</span> Estoy en el local</div>
-    ➜
-  </button>
+  <div class="title">
+    <h2>¡Bienvenido!</h2>
+    <p>¿Desde dónde querés pedir?</p>
+  </div>
 
-  <button class="opcion" onclick="seleccionar('calle')">
-    <div><span>🛍️</span> Quiero retirar</div>
-    ➜
-  </button>
+  <!-- OPCION 1 -->
+  <div class="option primary" onclick="irMenu('local')">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div class="icon">🍽️</div>
+      <div class="text">
+        <h3>Estoy en el local</h3>
+        <p>Pedir directo desde tu mesa</p>
+      </div>
+    </div>
+    <div class="arrow">›</div>
+  </div>
 
-  <button class="opcion" onclick="seleccionar('casa')">
-    <div><span>🏠</span> Estoy en casa</div>
-    ➜
-  </button>
+  <!-- OPCION 2 -->
+  <div class="option" onclick="irMenu('retiro')">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div class="icon">🛍️</div>
+      <div class="text">
+        <h3>Quiero retirar</h3>
+        <p>Pasar a buscar mi pedido</p>
+      </div>
+    </div>
+    <div class="arrow">›</div>
+  </div>
+
+  <!-- OPCION 3 -->
+  <div class="option" onclick="irMenu('casa')">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div class="icon">🏠</div>
+      <div class="text">
+        <h3>Estoy en casa</h3>
+        <p>Quiero delivery</p>
+      </div>
+    </div>
+    <div class="arrow">›</div>
+  </div>
+
+  <div class="footer">
+    Alo Rico © 2026
+  </div>
+
 </div>
-
-<!-- MENÚ -->
-<div id="menu-principal" class="botones">
-
-  <a class="boton" href="pizzas/index.html">
-    <div class="icono">🍕</div>
-    <span>Pizzas</span>
-  </a>
-
-  <a class="boton" href="lomitos/index.html">
-    <div class="icono">🥩</div>
-    <span>Lomitos</span>
-  </a>
-
-  <a class="boton" href="bebidas/index.html">
-    <div class="icono">🥤</div>
-    <span>Bebidas</span>
-  </a>
-
-  <a class="boton" href="hamburguesas/index.html">
-    <div class="icono">🍔</div>
-    <span>Hamburguesas</span>
-  </a>
-
-</div>
-
-<footer>
-  © Alo Rico 2026 - Desarrollado por Pucón Personalizados
-</footer>
-
-<div id="mensaje-pedido">📦 Ver mi pedido</div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  const params = new URLSearchParams(window.location.search);
-  const origenQR = params.get("origen");
-
-  if (origenQR) {
-    localStorage.setItem("origen", origenQR);
-  }
-
-  const origen = localStorage.getItem("origen");
-
-  if (origen) {
-    document.getElementById("pantalla-inicial").style.display = "none";
-  } else {
-    document.getElementById("menu-principal").style.display = "none";
-  }
-
-  const carrito = JSON.parse(localStorage.getItem("carritoPedido")) || [];
-  const totalPedido = carrito.reduce((sum, p) => sum + (p.precio || 0), 0);
-  const mensaje = document.getElementById("mensaje-pedido");
-
-  if (totalPedido > 0) {
-    mensaje.style.display = "block";
-  }
-
-  mensaje.addEventListener("click", () => {
-    localStorage.setItem("abrirPedido", "1");
-    window.location.href = "lomitos/index.html";
-  });
-
-});
-
-function seleccionar(tipo) {
-  localStorage.setItem("origen", tipo);
-
-  document.getElementById("pantalla-inicial").style.display = "none";
-  document.getElementById("menu-principal").style.display = "grid";
+function irMenu(tipo) {
+  // luego vamos a conectar esto al menú real
+  alert("Seleccionaste: " + tipo);
 }
 </script>
 
