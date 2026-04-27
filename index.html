@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <div id="contexto-box" style="
+  background:#fff3d6;
+  padding:10px;
+  margin:10px;
+  border-radius:10px;
+  font-weight:bold;
+  color:#c24a00;
+  display:none;
+">
+  📍 <span id="contexto-texto"></span>
+</div>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>¿Qué comemos hoy? | Alo Rico</title>
@@ -36,21 +47,44 @@
       gap: 20px;
       padding: 30px;
     }
-    .boton {
-      background-color: #ff8c00;
-      color: white;
-      font-size: 20px;
-      padding: 20px 40px;
-      border: none;
-      border-radius: 15px;
-      text-decoration: none;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: transform 0.2s, background-color 0.3s;
-    }
+  .boton {
+  background: linear-gradient(135deg, #ff8c00, #ff6a00);
+  color: white;
+  font-size: 20px;
+  padding: 20px 40px;
+  border: none;
+  border-radius: 15px;
+  text-decoration: none;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.boton:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+}
     .boton:hover {
       transform: scale(1.05);
       background-color: #e67500;
     }
+   <button id="btn-mozo" style="
+  display:none;
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#e53935;
+  color:white;
+  border:none;
+  padding:15px 20px;
+  border-radius:50px;
+  font-size:16px;
+  font-weight:bold;
+  box-shadow:0 4px 10px rgba(0,0,0,0.3);
+  cursor:pointer;
+  z-index:9999;
+">
+  🛎️ Necesito un mozo
+</button>
     footer {
       margin-top: 30px;
       font-size: 14px;
@@ -107,6 +141,54 @@
 
   document.getElementById("btnHamburguesas").onclick = () => 
     window.location.href = 'https://menu-principal-alo-rico.netlify.app/hamburguesas/';
+// 🔎 DETECCIÓN DE CONTEXTO (QR)
+function detectarContexto() {
+  const params = new URLSearchParams(window.location.search);
+
+  const origen = params.get("origen") || localStorage.getItem("origen") || "casa";
+  const mesa = params.get("mesa") || localStorage.getItem("mesa");
+
+  localStorage.setItem("origen", origen);
+  if (mesa) localStorage.setItem("mesa", mesa);
+
+  aplicarContexto(origen, mesa);
+}
+
+// 🎯 APLICAR VISUAL
+function aplicarContexto(origen, mesa) {
+  const box = document.getElementById("contexto-box");
+  const texto = document.getElementById("contexto-texto");
+  const btnMozo = document.getElementById("btn-mozo");
+
+  if (origen === "local") {
+    box.style.display = "block";
+    texto.innerText = "Estás en Mesa " + mesa;
+    btnMozo.style.display = "block";
+  } 
+  else if (origen === "calle") {
+    box.style.display = "block";
+    texto.innerText = "Pedido para retirar";
+    btnMozo.style.display = "none";
+  } 
+  else {
+    box.style.display = "block";
+    texto.innerText = "Pedido para delivery";
+    btnMozo.style.display = "none";
+  }
+}
+
+// 🛎️ LLAMAR MOZO
+document.getElementById("btn-mozo").addEventListener("click", () => {
+  const mesa = localStorage.getItem("mesa") || "?";
+
+  const mensaje = `🛎️ LLAMADO DE MOZO\n🪑 Mesa ${mesa}`;
+  const numero = "595XXXXXXXXX";
+
+  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`);
+});
+
+// 🚀 INICIO
+detectarContexto();
 </script>
 
   
