@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alo Rico</title>
+<title>Menú - Alo Rico</title>
 
 <style>
 * {
@@ -14,113 +14,151 @@
 }
 
 body {
-  background: linear-gradient(180deg, #0f0f0f, #1a1a1a);
+  background: #0f0f0f;
   color: white;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
-/* CONTENEDOR PRINCIPAL */
+/* CONTENEDOR */
 .app {
   width: 100%;
   max-width: 420px;
-  padding: 20px;
+  padding: 15px;
 }
 
-/* LOGO */
-.logo {
-  text-align: center;
-  margin-bottom: 30px;
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.logo img {
-  width: 130px;
-  display: block;
-  margin: 0 auto;
+.header img {
+  width: 90px;
 }
+
+.mesa {
+  border: 1px solid #ff7a00;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+/* ALERTA */
+.alerta {
+  margin-top: 15px;
+  background: rgba(255,122,0,0.1);
+  border: 1px solid #ff7a00;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 13px;
 }
 
 /* TITULO */
-.title {
-  text-align: center;
-  margin-bottom: 25px;
+.titulo {
+  margin-top: 20px;
+  font-size: 20px;
 }
 
-.title h2 {
-  font-size: 22px;
-  margin-bottom: 10px;
-}
-
-.title p {
-  font-size: 14px;
-  color: #aaa;
-}
-
-/* BOTONES */
-.option {
-  background: #1f1f1f;
-  border-radius: 16px;
-  padding: 18px;
-  margin-bottom: 15px;
+/* CATEGORIAS */
+.categorias {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: 0.3s;
+  gap: 10px;
+  margin-top: 15px;
+  overflow-x: auto;
+}
+
+.cat {
+  min-width: 70px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 50px;
+  background: #1a1a1a;
+  font-size: 12px;
   border: 1px solid #2a2a2a;
 }
 
-.option:hover {
-  transform: scale(1.02);
+.cat.active {
   border-color: #ff7a00;
+  color: #ff7a00;
 }
 
-/* BOTON PRINCIPAL */
-.option.primary {
-  background: linear-gradient(90deg, #ff7a00, #ff3c00);
-  border: none;
+/* PRODUCTOS */
+.producto {
+  display: flex;
+  background: #1a1a1a;
+  border-radius: 14px;
+  margin-top: 15px;
+  padding: 10px;
+  align-items: center;
 }
 
-.option.primary .text p {
-  color: #fff;
+.producto img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
-.icon {
-  font-size: 26px;
+.info {
+  flex: 1;
+  margin-left: 10px;
 }
 
-.text h3 {
-  font-size: 16px;
+.info h3 {
+  font-size: 14px;
 }
 
-.text p {
+.info p {
   font-size: 12px;
-  color: #bbb;
+  color: #aaa;
 }
 
-.arrow {
-  font-size: 18px;
-  color: #888;
+.precio {
+  margin-top: 5px;
+  color: #ff7a00;
+  font-weight: bold;
+}
+
+.add {
+  background: #ff7a00;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 /* FOOTER */
 .footer {
-  margin-top: 25px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+}
+
+.pedido {
+  flex: 1;
+  background: #222;
+  padding: 12px;
   text-align: center;
-  font-size: 12px;
-  color: #666;
 }
 
-/* ANIMACION */
-.app {
-  animation: fadeIn 0.6s ease;
+.mozo {
+  flex: 1;
+  background: #e53935;
+  padding: 12px;
+  text-align: center;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px);}
-  to { opacity: 1; transform: translateY(0);}
+/* ESPACIO FINAL */
+.spacer {
+  height: 80px;
 }
 </style>
 
@@ -129,63 +167,69 @@ body {
 
 <div class="app">
 
-  <!-- LOGO REAL -->
-  <div class="logo">
-    <img src="logo.png" alt="Alo Rico">
+  <!-- HEADER -->
+  <div class="header">
+    <img src="logo.png">
+    <div class="mesa">MESA 5</div>
   </div>
 
-  <div class="title">
-    <h2>¡Bienvenido!</h2>
-    <p>¿Desde dónde estás ingresando?</p>
+  <!-- ALERTA -->
+  <div class="alerta">
+    ⚡ Pedí directo desde tu mesa y evitá filas
   </div>
 
-  <!-- OPCION 1 -->
-  <div class="option primary" onclick="irMenu('local')">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <div class="icon">🍽️</div>
-      <div class="text">
-        <h3>Estoy en el local</h3>
-        <p>Pedir directo desde tu mesa</p>
-      </div>
+  <!-- TITULO -->
+  <div class="titulo">NUESTRO MENÚ</div>
+
+  <!-- CATEGORIAS -->
+  <div class="categorias">
+    <div class="cat">🔥</div>
+    <div class="cat active">🍔</div>
+    <div class="cat">🍕</div>
+    <div class="cat">🥤</div>
+    <div class="cat">🍰</div>
+  </div>
+
+  <!-- PRODUCTOS -->
+  <div class="producto">
+    <img src="burger1.jpg">
+    <div class="info">
+      <h3>Clásica Alo Rico</h3>
+      <p>Carne, queso, lechuga, tomate</p>
+      <div class="precio">Gs. 28.000</div>
     </div>
-    <div class="arrow">›</div>
+    <div class="add">+</div>
   </div>
 
-  <!-- OPCION 2 -->
-  <div class="option" onclick="irMenu('retiro')">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <div class="icon">🛍️</div>
-      <div class="text">
-        <h3>Quiero retirar</h3>
-        <p>Pasar a buscar mi pedido</p>
-      </div>
+  <div class="producto">
+    <img src="burger2.jpg">
+    <div class="info">
+      <h3>Doble Smash</h3>
+      <p>Doble carne, queso, panceta</p>
+      <div class="precio">Gs. 36.000</div>
     </div>
-    <div class="arrow">›</div>
+    <div class="add">+</div>
   </div>
 
-  <!-- OPCION 3 -->
-  <div class="option" onclick="irMenu('casa')">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <div class="icon">🏠</div>
-      <div class="text">
-        <h3>Estoy en casa</h3>
-        <p>Quiero delivery</p>
-      </div>
+  <div class="producto">
+    <img src="burger3.jpg">
+    <div class="info">
+      <h3>Pollo Crispy</h3>
+      <p>Pollo crispy, lechuga, salsa</p>
+      <div class="precio">Gs. 28.000</div>
     </div>
-    <div class="arrow">›</div>
+    <div class="add">+</div>
   </div>
 
-  <div class="footer">
-    Alo Rico © 2026
-  </div>
+  <div class="spacer"></div>
 
 </div>
 
-<script>
-function irMenu(tipo) {
-  alert("Seleccionaste: " + tipo);
-}
-</script>
+<!-- FOOTER -->
+<div class="footer">
+  <div class="pedido">🛒 Ver pedido</div>
+  <div class="mozo">🔔 Mozo</div>
+</div>
 
 </body>
 </html>
