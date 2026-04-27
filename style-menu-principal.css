@@ -1,242 +1,130 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>¿Qué comemos hoy? | Alo Rico</title>
-
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: #fff;
-      margin: 0;
-      padding: 0;
-      color: #1a1a1a;
-    }
-
-    /* HEADER */
-    header {
-      padding: 20px 15px 10px;
-      text-align: center;
-      background: white;
-    }
-
-    header img.logo {
-      width: 110px;
-    }
-
-    header h1 {
-      font-size: 22px;
-      margin: 10px 0 5px;
-      font-weight: 700;
-    }
-
-    header img.icono {
-      width: 50px;
-      opacity: 0.8;
-    }
-
-    /* PANTALLA INICIAL */
-    .pantalla-inicial {
-      padding: 20px;
-    }
-
-    .pantalla-inicial h2 {
-      font-size: 18px;
-      margin-bottom: 15px;
-      text-align: left;
-    }
-
-    /* OPCIONES */
-    .opcion {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: white;
-      padding: 18px;
-      border-radius: 16px;
-      margin-bottom: 12px;
-      border: none;
-      width: 100%;
-      font-size: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .opcion:hover {
-      transform: translateY(-2px);
-    }
-
-    .opcion span {
-      font-size: 22px;
-      margin-right: 10px;
-    }
-
-    /* MENÚ */
-    .botones {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      padding: 15px;
-    }
-
-    /* CARDS */
-    .boton {
-      background: white;
-      border-radius: 16px;
-      padding: 15px;
-      text-decoration: none;
-      color: #000;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 120px;
-      transition: all 0.2s ease;
-    }
-
-    .boton:hover {
-      transform: translateY(-2px);
-    }
-
-    .boton .icono {
-      font-size: 32px;
-      margin-bottom: 8px;
-    }
-
-    .boton span {
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    /* FOOTER */
-    footer {
-      margin: 20px 0;
-      font-size: 12px;
-      color: #999;
-      text-align: center;
-    }
-
-    /* PEDIDO FLOTANTE */
-    #mensaje-pedido {
-      display: none;
-      position: fixed;
-      bottom: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ff2e00;
-      color: #fff;
-      padding: 14px 22px;
-      border-radius: 30px;
-      font-weight: 600;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-      cursor: pointer;
-      z-index: 9999;
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <img src="logo.png" class="logo">
-  <h1>¿Qué comemos hoy?</h1>
-  <img src="Repartidor.png" class="icono">
-</header>
-
-<!-- PANTALLA INICIAL -->
-<div id="pantalla-inicial" class="pantalla-inicial">
-  <h2>¿Cómo querés pedir?</h2>
-
-  <button class="opcion" onclick="seleccionar('local')">
-    <div><span>🍽️</span> Estoy en el local</div>
-    ➜
-  </button>
-
-  <button class="opcion" onclick="seleccionar('calle')">
-    <div><span>🛍️</span> Quiero retirar</div>
-    ➜
-  </button>
-
-  <button class="opcion" onclick="seleccionar('casa')">
-    <div><span>🏠</span> Estoy en casa</div>
-    ➜
-  </button>
-</div>
-
-<!-- MENÚ -->
-<div id="menu-principal" class="botones">
-
-  <a class="boton" href="pizzas/index.html">
-    <div class="icono">🍕</div>
-    <span>Pizzas</span>
-  </a>
-
-  <a class="boton" href="lomitos/index.html">
-    <div class="icono">🥩</div>
-    <span>Lomitos</span>
-  </a>
-
-  <a class="boton" href="bebidas/index.html">
-    <div class="icono">🥤</div>
-    <span>Bebidas</span>
-  </a>
-
-  <a class="boton" href="hamburguesas/index.html">
-    <div class="icono">🍔</div>
-    <span>Hamburguesas</span>
-  </a>
-
-</div>
-
-<footer>
-  © Alo Rico 2026 - Desarrollado por Pucón Personalizados
-</footer>
-
-<div id="mensaje-pedido">📦 Ver mi pedido</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  const params = new URLSearchParams(window.location.search);
-  const origenQR = params.get("origen");
-
-  if (origenQR) {
-    localStorage.setItem("origen", origenQR);
-  }
-
-  const origen = localStorage.getItem("origen");
-
-  if (origen) {
-    document.getElementById("pantalla-inicial").style.display = "none";
-  } else {
-    document.getElementById("menu-principal").style.display = "none";
-  }
-
-  const carrito = JSON.parse(localStorage.getItem("carritoPedido")) || [];
-  const totalPedido = carrito.reduce((sum, p) => sum + (p.precio || 0), 0);
-  const mensaje = document.getElementById("mensaje-pedido");
-
-  if (totalPedido > 0) {
-    mensaje.style.display = "block";
-  }
-
-  mensaje.addEventListener("click", () => {
-    localStorage.setItem("abrirPedido", "1");
-    window.location.href = "lomitos/index.html";
-  });
-
-});
-
-function seleccionar(tipo) {
-  localStorage.setItem("origen", tipo);
-
-  document.getElementById("pantalla-inicial").style.display = "none";
-  document.getElementById("menu-principal").style.display = "grid";
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  color: #1a1a1a;
 }
-</script>
 
-</body>
-</html>
+/* HEADER */
+header {
+  padding: 20px 15px 10px;
+  text-align: center;
+  background: white;
+}
+
+header img.logo {
+  width: 110px;
+}
+
+header h1 {
+  font-size: 22px;
+  margin: 10px 0 5px;
+  font-weight: 700;
+}
+
+header img.icono {
+  width: 50px;
+  opacity: 0.8;
+}
+
+/* PANTALLA */
+.pantalla-inicial {
+  padding: 20px;
+}
+
+.pantalla-inicial h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* OPCIONES TIPO APP */
+.opcion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 18px;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.opcion:hover {
+  transform: translateY(-2px);
+}
+
+.opcion span {
+  font-size: 22px;
+  margin-right: 10px;
+}
+
+/* MENÚ */
+.botones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 15px;
+}
+
+/* CARDS DE MENÚ */
+.boton {
+  background: white;
+  border-radius: 16px;
+  padding: 15px;
+  text-decoration: none;
+  color: #000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  transition: all 0.2s ease;
+}
+
+.boton:hover {
+  transform: translateY(-2px);
+}
+
+/* ICONO GRANDE */
+.boton .icono {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+/* TEXTO */
+.boton span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* FOOTER */
+footer {
+  margin: 20px 0;
+  font-size: 12px;
+  color: #999;
+}
+
+/* PEDIDO FLOTANTE */
+#mensaje-pedido {
+  display: none;
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff2e00;
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 30px;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 9999;
+}
