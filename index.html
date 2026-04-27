@@ -1,20 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <div id="contexto-box" style="
-  background:#fff3d6;
-  padding:10px;
-  margin:10px;
-  border-radius:10px;
-  font-weight:bold;
-  color:#c24a00;
-  display:none;
-">
-  📍 <span id="contexto-texto"></span>
-</div>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>¿Qué comemos hoy? | Alo Rico</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -23,23 +13,36 @@
       margin: 0;
       padding: 0;
     }
+
     header {
       margin: 20px 0 10px;
     }
+
     header img.logo {
       width: 120px;
-      height: auto;
     }
+
     header h1 {
       font-size: 32px;
       color: #c24a00;
       margin: 10px 0 5px;
     }
+
     header img.icono {
       width: 60px;
-      height: auto;
       margin-top: 5px;
     }
+
+    #contexto-box {
+      background:#fff3d6;
+      padding:10px;
+      margin:10px;
+      border-radius:10px;
+      font-weight:bold;
+      color:#c24a00;
+      display:none;
+    }
+
     .botones {
       display: flex;
       justify-content: center;
@@ -47,50 +50,47 @@
       gap: 20px;
       padding: 30px;
     }
-  .boton {
-  background: linear-gradient(135deg, #ff8c00, #ff6a00);
-  color: white;
-  font-size: 20px;
-  padding: 20px 40px;
-  border: none;
-  border-radius: 15px;
-  text-decoration: none;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
 
-.boton:hover {
-  transform: scale(1.07);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.35);
-}
-    .boton:hover {
-      transform: scale(1.05);
-      background-color: #e67500;
+    .boton {
+      background: linear-gradient(135deg, #ff8c00, #ff6a00);
+      color: white;
+      font-size: 20px;
+      padding: 20px 40px;
+      border-radius: 15px;
+      text-decoration: none;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
     }
-   <button id="btn-mozo" style="
-  display:none;
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#e53935;
-  color:white;
-  border:none;
-  padding:15px 20px;
-  border-radius:50px;
-  font-size:16px;
-  font-weight:bold;
-  box-shadow:0 4px 10px rgba(0,0,0,0.3);
-  cursor:pointer;
-  z-index:9999;
-">
-  🛎️ Necesito un mozo
-</button>
+
+    .boton:hover {
+      transform: scale(1.07);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+    }
+
+    #btn-mozo {
+      display:none;
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#e53935;
+      color:white;
+      border:none;
+      padding:15px 20px;
+      border-radius:50px;
+      font-size:16px;
+      font-weight:bold;
+      box-shadow:0 4px 10px rgba(0,0,0,0.3);
+      cursor:pointer;
+      z-index:9999;
+    }
+
     footer {
       margin-top: 30px;
       font-size: 14px;
       color: #888;
     }
-    /* ✅ Mensaje flotante con parpadeo */
+
     #mensaje-pedido {
       display: none;
       position: fixed;
@@ -115,12 +115,18 @@
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <img src="logo.png" alt="Logo Alo Rico" class="logo" />
-    <h1>¿Qué comemos hoy?</h1>
-    <img src="Repartidor.png" alt="Repartidor" class="icono" />
-  </header>
+
+<header>
+  <img src="logo.png" class="logo">
+  <h1>¿Qué comemos hoy?</h1>
+  <img src="Repartidor.png" class="icono">
+</header>
+
+<div id="contexto-box">
+  📍 <span id="contexto-texto"></span>
+</div>
 
 <div class="botones">
   <a class="boton" id="btnPizza">🍕 Menú de Pizzas</a>
@@ -129,96 +135,69 @@
   <a class="boton" id="btnHamburguesas">🍔 Menú de Hamburguesas</a>
 </div>
 
+<button id="btn-mozo">🛎️ Necesito un mozo</button>
+
+<footer>
+  © Alo Rico 2025 - Desarrollado por Pucón Personalizados
+</footer>
+
+<div id="mensaje-pedido">📦 Tienes pedidos pendientes - Ver mis pedidos</div>
+
 <script>
-  document.getElementById("btnPizza").onclick = () => 
-    window.location.href = 'https://menu-principal-alo-rico.netlify.app/pizzas/';
+document.addEventListener("DOMContentLoaded", () => {
 
-  document.getElementById("btnLomitos").onclick = () => 
-    window.location.href = 'https://menu-principal-alo-rico.netlify.app/lomitos/';
+  // 🔘 BOTONES MENÚ
+  btnPizza.onclick = () => window.location.href = 'https://menu-principal-alo-rico.netlify.app/pizzas/';
+  btnLomitos.onclick = () => window.location.href = 'https://menu-principal-alo-rico.netlify.app/lomitos/';
+  btnBebidas.onclick = () => window.location.href = 'https://menu-principal-alo-rico.netlify.app/bebidas/';
+  btnHamburguesas.onclick = () => window.location.href = 'https://menu-principal-alo-rico.netlify.app/hamburguesas/';
 
-  document.getElementById("btnBebidas").onclick = () => 
-    window.location.href = 'https://menu-principal-alo-rico.netlify.app/bebidas/';
-
-  document.getElementById("btnHamburguesas").onclick = () => 
-    window.location.href = 'https://menu-principal-alo-rico.netlify.app/hamburguesas/';
-// 🔎 DETECCIÓN DE CONTEXTO (QR)
-function detectarContexto() {
+  // 🔎 CONTEXTO
   const params = new URLSearchParams(window.location.search);
-
   const origen = params.get("origen") || localStorage.getItem("origen") || "casa";
   const mesa = params.get("mesa") || localStorage.getItem("mesa");
 
   localStorage.setItem("origen", origen);
   if (mesa) localStorage.setItem("mesa", mesa);
 
-  aplicarContexto(origen, mesa);
-}
-
-// 🎯 APLICAR VISUAL
-function aplicarContexto(origen, mesa) {
   const box = document.getElementById("contexto-box");
   const texto = document.getElementById("contexto-texto");
   const btnMozo = document.getElementById("btn-mozo");
 
   if (origen === "local") {
     box.style.display = "block";
-    texto.innerText = "Estás en Mesa " + mesa;
+    texto.innerText = "Mesa " + mesa;
     btnMozo.style.display = "block";
-  } 
-  else if (origen === "calle") {
+  } else if (origen === "calle") {
     box.style.display = "block";
     texto.innerText = "Pedido para retirar";
-    btnMozo.style.display = "none";
-  } 
-  else {
+  } else {
     box.style.display = "block";
-    texto.innerText = "Pedido para delivery";
-    btnMozo.style.display = "none";
+    texto.innerText = "Delivery";
   }
-}
 
-// 🛎️ LLAMAR MOZO
-document.getElementById("btn-mozo").addEventListener("click", () => {
-  const mesa = localStorage.getItem("mesa") || "?";
+  // 🛎️ MOZO
+  btnMozo.onclick = () => {
+    const mensaje = `🛎️ LLAMADO DE MOZO\n🪑 Mesa ${mesa}`;
+    window.open(`https://wa.me/595XXXXXXXXX?text=${encodeURIComponent(mensaje)}`);
+  };
 
-  const mensaje = `🛎️ LLAMADO DE MOZO\n🪑 Mesa ${mesa}`;
-  const numero = "595XXXXXXXXX";
+  // 📦 CARRITO
+  const carrito = JSON.parse(localStorage.getItem("carritoPedido")) || [];
+  const total = carrito.reduce((sum, p) => sum + (p.precio || 0), 0);
+  const mensajePedido = document.getElementById("mensaje-pedido");
 
-  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`);
+  if (total > 0) {
+    mensajePedido.style.display = "block";
+  }
+
+  mensajePedido.onclick = () => {
+    localStorage.setItem("abrirPedido", "1");
+    window.location.href = "https://menu-principal-alo-rico.netlify.app/lomitos/";
+  };
+
 });
-
-// 🚀 INICIO
-detectarContexto();
 </script>
 
-  
-  
-  </div>
-
-  <footer>
-    © Alo Rico 2025 - Desarrollado por Pucón Personalizados
-  </footer>
-
-  <!-- ✅ Mensaje flotante -->
-  <div id="mensaje-pedido">📦 Tienes pedidos pendientes - Ver mis pedidos</div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // ✅ Leer carrito y calcular total
-      const carrito = JSON.parse(localStorage.getItem("carritoPedido")) || [];
-      const totalPedido = carrito.reduce((sum, p) => sum + (p.precio || 0), 0);
-      const mensaje = document.getElementById("mensaje-pedido");
-
-      if (totalPedido > 0) {
-        mensaje.style.display = "block";
-      }
-
-      // ✅ Al hacer clic, marcar para abrir pedido y redirigir a lomitos
-      mensaje.addEventListener("click", () => {
-        localStorage.setItem("abrirPedido", "1");
-       window.location.href = "https://menu-principal-alo-rico.netlify.app/lomitos/";
-      });
-    });
-  </script>
 </body>
 </html>
