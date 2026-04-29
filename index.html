@@ -3,177 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alo Rico</title>
+<title>Alo Rico - Menú</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
-
 body {
-  background: linear-gradient(180deg, #0f0f0f, #1a1a1a);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #111;
+  color: #fff;
 }
 
-/* CONTENEDOR */
-.app {
-  width: 100%;
-  max-width: 420px;
-  padding: 20px;
-}
-
-/* LOGO */
-.logo {
+header {
   text-align: center;
-  margin-bottom: 25px;
-}
-
-.logo img {
-  width: 120px;
-}
-
-/* TITULO */
-.title {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.title h2 {
+  padding: 15px;
+  background: #000;
   font-size: 22px;
-  margin-bottom: 8px;
 }
 
-.title p {
-  font-size: 14px;
-  color: #aaa;
+h2 {
+  border-bottom: 2px solid #444;
+  padding-bottom: 5px;
 }
 
-/* BOTONES */
-.option {
-  background: #1f1f1f;
-  border-radius: 16px;
-  padding: 18px;
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: 0.3s;
-  border: 1px solid #2a2a2a;
-  text-decoration: none;
-  color: white;
+.categoria {
+  padding: 15px;
 }
 
-.option:hover {
-  transform: scale(1.02);
-  border-color: #ff7a00;
+.item {
+  background: #1c1c1c;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
 }
 
-.option.primary {
-  background: linear-gradient(90deg, #ff7a00, #ff3c00);
+button {
+  margin-top: 5px;
+  padding: 8px;
   border: none;
+  background: #ff9800;
+  color: #000;
+  font-weight: bold;
+  border-radius: 5px;
 }
 
-.text h3 {
-  font-size: 16px;
+#carrito {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #000;
+  padding: 10px;
+  border-top: 2px solid #444;
 }
 
-.text p {
-  font-size: 12px;
-  color: #bbb;
-}
-
-.icon {
-  font-size: 24px;
-}
-
-.arrow {
-  font-size: 18px;
-  color: #888;
-}
-
-/* FOOTER */
-.footer {
-  margin-top: 25px;
-  text-align: center;
-  font-size: 12px;
-  color: #666;
-}
-
-/* ANIMACION */
-.app {
-  animation: fadeIn 0.6s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px);}
-  to { opacity: 1; transform: translateY(0);}
-}
 </style>
-
 </head>
+
 <body>
 
-<div class="app">
+<header>
+  🍔 ALO RICO - MENÚ
+  <div id="mesaInfo"></div>
+</header>
 
-  <!-- LOGO -->
-  <div class="logo">
-    <img src="logo.png" alt="Alo Rico">
-  </div>
+<div id="menu"></div>
 
-  <!-- TITULO -->
-  <div class="title">
-    <h2>¿Cómo querés pedir?</h2>
-    <p>Elegí una opción para continuar</p>
-  </div>
-
-  <!-- OPCIONES -->
-
-  <a class="option primary" href="mesa.html">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <div class="icon">🪑</div>
-      <div class="text">
-        <h3>Estoy en el local</h3>
-        <p>Pedir desde la mesa</p>
-      </div>
-    </div>
-    <div class="arrow">›</div>
-  </a>
-
-  <a class="option" href="menu.html">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <div class="icon">🛍️</div>
-      <div class="text">
-        <h3>Quiero retirar</h3>
-        <p>Pasar a buscar</p>
-      </div>
-    </div>
-    <div class="arrow">›</div>
-  </a>
-
-  <a class="option" href="menu.html">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <div class="icon">🏠</div>
-      <div class="text">
-        <h3>Delivery</h3>
-        <p>Recibir en casa</p>
-      </div>
-    </div>
-    <div class="arrow">›</div>
-  </a>
-
-  <div class="footer">
-    Alo Rico © 2026
-  </div>
-
+<div id="carrito">
+  <b>🛒 Pedido:</b>
+  <span id="lista"></span>
+  <br>
+  <button onclick="enviarPedido()">Enviar por WhatsApp</button>
 </div>
+
+<script>
+
+// 🔗 TUS JSON (ajustar si cambia algo)
+const endpoints = {
+  pizzas: "https://raw.githubusercontent.com/1967-ROB/precios-alorico/main/pizzas.json",
+  hamburguesas: "https://raw.githubusercontent.com/1967-ROB/precios-alorico-hamb-lomito/main/hamburguesas.json",
+  lomitos: "https://raw.githubusercontent.com/1967-ROB/lomitos/main/lomitos.json",
+  bebidas: "https://raw.githubusercontent.com/1967-ROB/bebidas/main/bebidas.json"
+};
+
+// 🪑 Mesa desde QR
+const mesa = new URLSearchParams(window.location.search).get("mesa") || "SIN MESA";
+document.getElementById("mesaInfo").innerText = "Mesa: " + mesa;
+
+// 🛒 carrito real
+let carrito = [];
+
+// 🔄 cargar menú dinámico
+async function cargarMenu() {
+  const contenedor = document.getElementById("menu");
+
+  for (const categoria in endpoints) {
+    try {
+      const res = await fetch(endpoints[categoria]);
+      const data = await res.json();
+
+      const div = document.createElement("div");
+      div.className = "categoria";
+
+      const titulo = document.createElement("h2");
+      titulo.textContent = categoria.toUpperCase();
+      div.appendChild(titulo);
+
+      data.forEach(prod => {
+        const item = document.createElement("div");
+        item.className = "item";
+
+        item.innerHTML = `
+          <b>${prod.nombre}</b><br>
+          ${prod.precio} Gs<br>
+          <button onclick="agregar('${prod.id}','${prod.nombre}')">Agregar</button>
+        `;
+
+        div.appendChild(item);
+      });
+
+      contenedor.appendChild(div);
+
+    } catch (e) {
+      console.error("Error cargando", categoria, e);
+    }
+  }
+}
+
+// ➕ agregar producto
+function agregar(id, nombre) {
+  carrito.push({id, nombre});
+  renderCarrito();
+}
+
+// 🔄 actualizar carrito visual
+function renderCarrito() {
+  const lista = document.getElementById("lista");
+  lista.innerHTML = carrito.map(p => p.nombre).join(", ");
+}
+
+// 📲 enviar pedido
+function enviarPedido() {
+  if (carrito.length === 0) {
+    alert("Agregá productos primero");
+    return;
+  }
+
+  let mensaje = `🍔 Pedido Alo Rico%0A`;
+  mensaje += `🪑 Mesa: ${mesa}%0A%0A`;
+
+  carrito.forEach(p => {
+    mensaje += `- ${p.nombre}%0A`;
+  });
+
+  const telefono = "595XXXXXXXXX"; // 🔴 CAMBIAR
+  window.open(`https://wa.me/${telefono}?text=${mensaje}`);
+}
+
+// 🚀 iniciar
+cargarMenu();
+
+</script>
 
 </body>
 </html>
