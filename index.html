@@ -8,15 +8,15 @@
 <style>
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-</head>
-<body>
-  <header>
-    <img src="logo.png" alt="Logo Alo Rico" class="logo" />
-    <h1>¿Qué comemos hoy?</h1>
-    <img src="Repartidor.png" alt="Repartidor" class="icono" />
-  </header>
+body {
+  background: linear-gradient(180deg, #0f0f0f, #1a1a1a);
+  color: white;
+}
 
 /* CONTENEDOR */
 .app {
@@ -46,21 +46,21 @@ h1 {
   margin-top: 5px;
 }
 
-/* CONTENEDOR BOTONES */
+/* BOTONES */
 .botones {
   max-width: 500px;
   margin: auto;
 }
 
-/* BOTONES */
+/* BOTON */
 .boton {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 20px;
+  padding: 16px 18px;
   border-radius: 16px;
   text-decoration: none;
-  margin: 10px 0;
+  margin: 12px 0;
 
   background: linear-gradient(90deg, #ff7a00, #ff3c00);
   color: #000;
@@ -72,30 +72,26 @@ h1 {
   transition: all 0.25s ease;
 }
 
-/* TEXTO MÁS LIMPIO */
-.texto h3 {
-  color: #000;
-}
-
-.texto p {
-  color: #000;
-}
-
-/* HOVER PRO */
 .boton:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 15px 28px rgba(0,0,0,0.35);
 }
 
-/* FLECHA */
-.arrow {
-  color: #000;
-  font-size: 20px;
+/* CONTENIDO INTERNO */
+.contenido-boton {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
-/* DESTACADO */
-.boton.primary {
-  background: linear-gradient(90deg, #ff7a00, #ff3c00);
-  border: none;
+
+/* MINIATURA */
+.miniatura {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 /* TEXTO */
@@ -106,21 +102,19 @@ h1 {
 .texto h3 {
   margin: 0;
   font-size: 16px;
+  color: #000;
 }
 
 .texto p {
   margin: 2px 0 0;
   font-size: 12px;
-  color: #000;
+  color: #222;
 }
 
-/* ICONOS */
-.icono-btn {
-  font-size: 22px;
-}
-
+/* FLECHA */
 .arrow {
-  color: #888;
+  color: #000;
+  font-size: 20px;
 }
 
 /* FOOTER */
@@ -131,7 +125,7 @@ footer {
   color: #666;
 }
 
-/* MENSAJE FLOTANTE (RESPETADO) */
+/* MENSAJE FLOTANTE */
 #mensaje-pedido {
   display: none;
   position: fixed;
@@ -154,6 +148,22 @@ footer {
   50% { background-color: #ff9900; }
   100% { background-color: #ffcc00; }
 }
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .miniatura {
+    width: 55px;
+    height: 55px;
+  }
+
+  .texto h3 {
+    font-size: 14px;
+  }
+
+  .texto p {
+    font-size: 11px;
+  }
+}
 </style>
 </head>
 
@@ -169,36 +179,50 @@ footer {
 
 <div class="botones">
 
-  <!-- 🔥 MANTENEMOS TUS LINKS EXACTOS -->
-
-  <a class="boton primary" href="pizzas/index.html">
-    <div class="texto">
-      <h3>🍕 Pizzas</h3>
-      <p>Ver menú completo</p>
+  <!-- PIZZAS -->
+  <a class="boton" href="pizzas/index.html">
+    <div class="contenido-boton">
+      <img src="pizza.png" class="miniatura">
+      <div class="texto">
+        <h3>🍕 Pizzas</h3>
+        <p>Ver menú completo</p>
+      </div>
     </div>
     <div class="arrow">›</div>
   </a>
 
+  <!-- LOMITOS -->
   <a class="boton" href="lomitos/index.html">
-    <div class="texto">
-      <h3>🥩 Lomitos</h3>
-      <p>Especialidades</p>
+    <div class="contenido-boton">
+      <img src="lomito.png" class="miniatura">
+      <div class="texto">
+        <h3>🥩 Lomitos</h3>
+        <p>Especialidades</p>
+      </div>
     </div>
     <div class="arrow">›</div>
   </a>
 
+  <!-- HAMBURGUESAS -->
   <a class="boton" href="hamburguesas/index.html">
-    <div class="texto">
-      <h3>🍔 Hamburguesas</h3>
-      <p>Clásicas y dobles</p>
+    <div class="contenido-boton">
+      <img src="hamburguesa.png" class="miniatura">
+      <div class="texto">
+        <h3>🍔 Hamburguesas</h3>
+        <p>Clásicas y dobles</p>
+      </div>
     </div>
     <div class="arrow">›</div>
   </a>
 
+  <!-- BEBIDAS -->
   <a class="boton" href="bebidas/index.html">
-    <div class="texto">
-      <h3>🥤 Bebidas</h3>
-      <p>Frías y combos</p>
+    <div class="contenido-boton">
+      <img src="bebida.png" class="miniatura">
+      <div class="texto">
+        <h3>🥤 Bebidas</h3>
+        <p>Frías y combos</p>
+      </div>
     </div>
     <div class="arrow">›</div>
   </a>
@@ -211,7 +235,7 @@ footer {
 
 </div>
 
-<!-- 🔴 NO TOQUÉ TU LÓGICA -->
+<!-- 🔴 TU LÓGICA ORIGINAL (NO TOCADA) -->
 <div id="mensaje-pedido">📦 Tienes pedidos pendientes - Ver mis pedidos</div>
 
 <script>
