@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alo Rico - Menú</title>
+<title>Menú - Alo Rico</title>
 
 <style>
 body {
@@ -14,14 +14,13 @@ body {
 }
 
 header {
-  text-align: center;
   padding: 15px;
+  text-align: center;
   background: #000;
-  font-size: 22px;
 }
 
 h2 {
-  border-bottom: 2px solid #444;
+  border-bottom: 1px solid #444;
   padding-bottom: 5px;
 }
 
@@ -33,17 +32,16 @@ h2 {
   background: #1c1c1c;
   margin: 10px 0;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 button {
   margin-top: 5px;
-  padding: 8px;
+  padding: 6px 10px;
   border: none;
-  background: #ff9800;
-  color: #000;
-  font-weight: bold;
+  background: orange;
   border-radius: 5px;
+  font-weight: bold;
 }
 
 #carrito {
@@ -54,44 +52,51 @@ button {
   padding: 10px;
   border-top: 2px solid #444;
 }
-
 </style>
-</head>
 
+</head>
 <body>
 
 <header>
-  🍔 ALO RICO - MENÚ
-  <div id="mesaInfo"></div>
+  <h2 id="titulo">Cargando...</h2>
 </header>
 
 <div id="menu"></div>
 
 <div id="carrito">
-  <b>🛒 Pedido:</b>
-  <span id="lista"></span>
-  <br>
-  <button onclick="enviarPedido()">Enviar por WhatsApp</button>
+  🛒 <span id="lista"></span><br>
+  <button onclick="enviarPedido()">Enviar pedido</button>
 </div>
 
 <script>
 
-// 🔗 TUS JSON (ajustar si cambia algo)
+// 🔎 tipo de pedido
+const params = new URLSearchParams(window.location.search);
+const tipo = params.get("tipo") || "general";
+const mesa = params.get("mesa") || null;
+
+// 🎯 título dinámico
+let titulo = "MENÚ";
+if (tipo === "mesa") titulo = "Pedido en Mesa";
+if (tipo === "retiro") titulo = "Retiro en Local";
+if (tipo === "delivery") titulo = "Delivery";
+
+if (mesa) titulo += " - Mesa " + mesa;
+
+document.getElementById("titulo").innerText = titulo;
+
+// 🔗 endpoints reales (tus repos)
 const endpoints = {
-  pizzas: "https://raw.githubusercontent.com/1967-ROB/precios-alorico/main/pizzas.json",
-  hamburguesas: "https://raw.githubusercontent.com/1967-ROB/precios-alorico-hamb-lomito/main/hamburguesas.json",
-  lomitos: "https://raw.githubusercontent.com/1967-ROB/lomitos/main/lomitos.json",
-  bebidas: "https://raw.githubusercontent.com/1967-ROB/bebidas/main/bebidas.json"
+  PIZZAS: "https://raw.githubusercontent.com/1967-ROB/precios-alorico/main/pizzas.json",
+  HAMBURGUESAS: "https://raw.githubusercontent.com/1967-ROB/precios-alorico-hamb-lomito/main/hamburguesas.json",
+  LOMITOS: "https://raw.githubusercontent.com/1967-ROB/lomitos/main/lomitos.json",
+  BEBIDAS: "https://raw.githubusercontent.com/1967-ROB/bebidas/main/bebidas.json"
 };
 
-// 🪑 Mesa desde QR
-const mesa = new URLSearchParams(window.location.search).get("mesa") || "SIN MESA";
-document.getElementById("mesaInfo").innerText = "Mesa: " + mesa;
-
-// 🛒 carrito real
+// 🛒 carrito
 let carrito = [];
 
-// 🔄 cargar menú dinámico
+// 🚀 cargar menú
 async function cargarMenu() {
   const contenedor = document.getElementById("menu");
 
@@ -104,7 +109,7 @@ async function cargarMenu() {
       div.className = "categoria";
 
       const titulo = document.createElement("h2");
-      titulo.textContent = categoria.toUpperCase();
+      titulo.innerText = categoria;
       div.appendChild(titulo);
 
       data.forEach(prod => {
@@ -122,43 +127,47 @@ async function cargarMenu() {
 
       contenedor.appendChild(div);
 
-    } catch (e) {
-      console.error("Error cargando", categoria, e);
+    } catch (err) {
+      console.error("Error cargando", categoria, err);
     }
   }
 }
 
-// ➕ agregar producto
+// ➕ agregar al carrito
 function agregar(id, nombre) {
-  carrito.push({id, nombre});
+  carrito.push({ id, nombre });
   renderCarrito();
 }
 
-// 🔄 actualizar carrito visual
+// 🔄 render carrito
 function renderCarrito() {
   const lista = document.getElementById("lista");
-  lista.innerHTML = carrito.map(p => p.nombre).join(", ");
+  lista.innerText = carrito.map(p => p.nombre).join(", ");
 }
 
 // 📲 enviar pedido
 function enviarPedido() {
   if (carrito.length === 0) {
-    alert("Agregá productos primero");
+    alert("Agregá algo al pedido");
     return;
   }
 
   let mensaje = `🍔 Pedido Alo Rico%0A`;
-  mensaje += `🪑 Mesa: ${mesa}%0A%0A`;
+  mensaje += `Tipo: ${tipo}%0A`;
+
+  if (mesa) mensaje += `Mesa: ${mesa}%0A`;
+
+  mensaje += `%0A`;
 
   carrito.forEach(p => {
     mensaje += `- ${p.nombre}%0A`;
   });
 
-  const telefono = "595XXXXXXXXX"; // 🔴 CAMBIAR
+  const telefono = "+595 971 891251"; // 🔴 CAMBIAR
   window.open(`https://wa.me/${telefono}?text=${mensaje}`);
 }
 
-// 🚀 iniciar
+// iniciar
 cargarMenu();
 
 </script>
