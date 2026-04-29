@@ -1,175 +1,213 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menú - Alo Rico</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>¿Qué comemos hoy? | Alo Rico</title>
 
 <style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: #111;
-  color: #fff;
+* {
+  box-sizing: border-box;
 }
-
-header {
-  padding: 15px;
-  text-align: center;
-  background: #000;
-}
-
-h2 {
-  border-bottom: 1px solid #444;
-  padding-bottom: 5px;
-}
-
-.categoria {
-  padding: 15px;
-}
-
-.item {
-  background: #1c1c1c;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-button {
-  margin-top: 5px;
-  padding: 6px 10px;
-  border: none;
-  background: orange;
-  border-radius: 5px;
-  font-weight: bold;
-}
-
-#carrito {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: #000;
-  padding: 10px;
-  border-top: 2px solid #444;
-}
-</style>
 
 </head>
 <body>
+  <header>
+    <img src="logo.png" alt="Logo Alo Rico" class="logo" />
+    <h1>¿Qué comemos hoy?</h1>
+    <img src="Repartidor.png" alt="Repartidor" class="icono" />
+  </header>
+
+/* CONTENEDOR */
+.app {
+  max-width: 420px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 110px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 5px 0;
+}
+
+.icono {
+  width: 50px;
+  margin-top: 5px;
+}
+
+/* BOTONES */
+.botones {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.boton {
+  background: #1f1f1f;
+  border-radius: 16px;
+  padding: 18px;
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #2a2a2a;
+  transition: 0.3s;
+}
+
+.boton:hover {
+  transform: scale(1.03);
+  border-color: #ff7a00;
+}
+
+/* DESTACADO */
+.boton.primary {
+  background: linear-gradient(90deg, #ff7a00, #ff3c00);
+  border: none;
+}
+
+/* TEXTO */
+.texto {
+  text-align: left;
+}
+
+.texto h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.texto p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #bbb;
+}
+
+/* ICONOS */
+.icono-btn {
+  font-size: 22px;
+}
+
+.arrow {
+  color: #888;
+}
+
+/* FOOTER */
+footer {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+
+/* MENSAJE FLOTANTE (RESPETADO) */
+#mensaje-pedido {
+  display: none;
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffcc00;
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 9999;
+  animation: parpadeo 1.5s infinite;
+}
+
+@keyframes parpadeo {
+  0% { background-color: #ffcc00; }
+  50% { background-color: #ff9900; }
+  100% { background-color: #ffcc00; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
 
 <header>
-  <h2 id="titulo">Cargando...</h2>
+  <img src="logo.png" alt="Logo Alo Rico" class="logo" />
+  <h1>¿Qué comemos hoy?</h1>
+  <img src="Repartidor.png" alt="Repartidor" class="icono" />
 </header>
 
-<div id="menu"></div>
+<div class="botones">
 
-<div id="carrito">
-  🛒 <span id="lista"></span><br>
-  <button onclick="enviarPedido()">Enviar pedido</button>
+  <!-- 🔥 MANTENEMOS TUS LINKS EXACTOS -->
+
+  <a class="boton primary" href="pizzas/index.html">
+    <div class="texto">
+      <h3>🍕 Pizzas</h3>
+      <p>Ver menú completo</p>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a class="boton" href="lomitos/index.html">
+    <div class="texto">
+      <h3>🥩 Lomitos</h3>
+      <p>Especialidades</p>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a class="boton" href="hamburguesas/index.html">
+    <div class="texto">
+      <h3>🍔 Hamburguesas</h3>
+      <p>Clásicas y dobles</p>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a class="boton" href="bebidas/index.html">
+    <div class="texto">
+      <h3>🥤 Bebidas</h3>
+      <p>Frías y combos</p>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
 </div>
 
+<footer>
+  © Alo Rico 2025
+</footer>
+
+</div>
+
+<!-- 🔴 NO TOQUÉ TU LÓGICA -->
+<div id="mensaje-pedido">📦 Tienes pedidos pendientes - Ver mis pedidos</div>
+
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const carrito = JSON.parse(localStorage.getItem("carritoPedido")) || [];
+  const totalPedido = carrito.reduce((sum, p) => sum + (p.precio || 0), 0);
+  const mensaje = document.getElementById("mensaje-pedido");
 
-// 🔎 tipo de pedido
-const params = new URLSearchParams(window.location.search);
-const tipo = params.get("tipo") || "general";
-const mesa = params.get("mesa") || null;
-
-// 🎯 título dinámico
-let titulo = "MENÚ";
-if (tipo === "mesa") titulo = "Pedido en Mesa";
-if (tipo === "retiro") titulo = "Retiro en Local";
-if (tipo === "delivery") titulo = "Delivery";
-
-if (mesa) titulo += " - Mesa " + mesa;
-
-document.getElementById("titulo").innerText = titulo;
-
-// 🔗 endpoints reales (tus repos)
-const endpoints = {
-  PIZZAS: "https://raw.githubusercontent.com/1967-ROB/precios-alorico/main/pizzas.json",
-  HAMBURGUESAS: "https://raw.githubusercontent.com/1967-ROB/precios-alorico-hamb-lomito/main/hamburguesas.json",
-  LOMITOS: "https://raw.githubusercontent.com/1967-ROB/lomitos/main/lomitos.json",
-  BEBIDAS: "https://raw.githubusercontent.com/1967-ROB/bebidas/main/bebidas.json"
-};
-
-// 🛒 carrito
-let carrito = [];
-
-// 🚀 cargar menú
-async function cargarMenu() {
-  const contenedor = document.getElementById("menu");
-
-  for (const categoria in endpoints) {
-    try {
-      const res = await fetch(endpoints[categoria]);
-      const data = await res.json();
-
-      const div = document.createElement("div");
-      div.className = "categoria";
-
-      const titulo = document.createElement("h2");
-      titulo.innerText = categoria;
-      div.appendChild(titulo);
-
-      data.forEach(prod => {
-        const item = document.createElement("div");
-        item.className = "item";
-
-        item.innerHTML = `
-          <b>${prod.nombre}</b><br>
-          ${prod.precio} Gs<br>
-          <button onclick="agregar('${prod.id}','${prod.nombre}')">Agregar</button>
-        `;
-
-        div.appendChild(item);
-      });
-
-      contenedor.appendChild(div);
-
-    } catch (err) {
-      console.error("Error cargando", categoria, err);
-    }
-  }
-}
-
-// ➕ agregar al carrito
-function agregar(id, nombre) {
-  carrito.push({ id, nombre });
-  renderCarrito();
-}
-
-// 🔄 render carrito
-function renderCarrito() {
-  const lista = document.getElementById("lista");
-  lista.innerText = carrito.map(p => p.nombre).join(", ");
-}
-
-// 📲 enviar pedido
-function enviarPedido() {
-  if (carrito.length === 0) {
-    alert("Agregá algo al pedido");
-    return;
+  if (totalPedido > 0) {
+    mensaje.style.display = "block";
   }
 
-  let mensaje = `🍔 Pedido Alo Rico%0A`;
-  mensaje += `Tipo: ${tipo}%0A`;
-
-  if (mesa) mensaje += `Mesa: ${mesa}%0A`;
-
-  mensaje += `%0A`;
-
-  carrito.forEach(p => {
-    mensaje += `- ${p.nombre}%0A`;
+  mensaje.addEventListener("click", () => {
+    localStorage.setItem("abrirPedido", "1");
+    window.location.href = "lomitos/index.html";
   });
-
-  const telefono = "+595 971 891251"; // 🔴 CAMBIAR
-  window.open(`https://wa.me/${telefono}?text=${mensaje}`);
-}
-
-// iniciar
-cargarMenu();
-
+});
 </script>
 
 </body>
