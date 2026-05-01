@@ -78,23 +78,54 @@
 </div>
 
 <!-- MENSAJE PEDIDO -->
-<div id="mensaje-pedido">📦 Tienes pedidos pendientes - Ver mis pedidos</div>
+<div id="mensaje-pedido" style="display:none;">
+  📦 Tienes pedidos pendientes - Ver mis pedidos
+</div>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const carrito = JSON.parse(localStorage.getItem("carritoPedido")) || [];
-  const totalPedido = carrito.reduce((sum, p) => sum + (p.precio || 0), 0);
+<!-- 🔥 FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyADGYsqhbCFuKj2fXpontLpND_rtT7Nlno",
+  authDomain: "alorico-59754.firebaseapp.com",
+  databaseURL: "https://alorico-59754-default-rtdb.firebaseio.com",
+  projectId: "alorico-59754",
+  storageBucket: "alorico-59754.firebasestorage.app",
+  messagingSenderId: "120993494626",
+  appId: "1:120993494626:web:9f9cb0ad6fbfbd1abd033b"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// 🔑 ID cliente compartido
+let clienteId = localStorage.getItem("clienteId");
+if (!clienteId) {
+  clienteId = "cliente_" + Date.now();
+  localStorage.setItem("clienteId", clienteId);
+}
+
+const pedidoRef = ref(db, "pedidos/" + clienteId);
+
+// 🔥 ESCUCHAR PEDIDO GLOBAL
+onValue(pedidoRef, (snapshot) => {
+  const data = snapshot.val();
   const mensaje = document.getElementById("mensaje-pedido");
 
-  if (totalPedido > 0) {
+  if (data) {
     mensaje.style.display = "block";
+  } else {
+    mensaje.style.display = "none";
   }
-
-  mensaje.addEventListener("click", () => {
-    localStorage.setItem("abrirPedido", "1");
-    window.location.href = "https://alo-rico.github.io/lomitos/";
-  });
 });
+
+// 👉 IR A VER PEDIDO
+document.getElementById("mensaje-pedido").onclick = () => {
+  window.location.href = "https://alo-rico.github.io/lomitos/";
+};
+
 </script>
 
 </body>
