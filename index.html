@@ -1,12 +1,130 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>¿Qué comemos hoy? | Alo Rico</title>
 
-  <!-- CSS PRO -->
-  <link rel="stylesheet" href="style-alorico.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>¿Qué comemos hoy? | Alo Rico</title>
+
+<link rel="stylesheet" href="style-alorico.css">
+
+<style>
+
+/* BOTON PEDIDO */
+
+#mensaje-pedido{
+  display:none;
+  position:fixed;
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#ffc107;
+  color:#000;
+  padding:14px 22px;
+  border-radius:16px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
+  z-index:9999;
+  animation:pulse 1.5s infinite;
+  transition:.2s;
+}
+
+#mensaje-pedido:hover{
+  transform:translateX(-50%) scale(1.03);
+}
+
+@keyframes pulse{
+  0%{transform:translateX(-50%) scale(1);}
+  50%{transform:translateX(-50%) scale(1.03);}
+  100%{transform:translateX(-50%) scale(1);}
+}
+
+/* VENTANA PEDIDO */
+
+#pedido-flotante{
+ position:fixed;
+ bottom:95px;
+ left:50%;
+ transform:translateX(-50%) translateY(120px);
+ background:#fff;
+ padding:18px;
+ border-radius:18px;
+ box-shadow:0 12px 35px rgba(0,0,0,.25);
+ opacity:0;
+ transition:all .35s ease;
+ z-index:99999;
+ width:90%;
+ max-width:340px;
+ text-align:center;
+ pointer-events:none;
+}
+
+#pedido-flotante.activo{
+ transform:translateX(-50%) translateY(0);
+ opacity:1;
+ pointer-events:auto;
+}
+
+#pedido-flotante ul{
+ list-style:none;
+ padding:0;
+ margin:0;
+}
+
+#pedido-flotante li{
+ margin-bottom:10px;
+ border-bottom:1px solid #ddd;
+ padding-bottom:6px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+
+.acciones-pedido{
+ display:flex;
+ gap:10px;
+ margin-top:12px;
+}
+
+.acciones-pedido button{
+ flex:1;
+ padding:11px;
+ border:none;
+ border-radius:10px;
+ font-weight:bold;
+ color:white;
+ cursor:pointer;
+ transition:.15s;
+ box-shadow:0 4px 0 rgba(0,0,0,.2);
+}
+
+.acciones-pedido button:active{
+ transform:translateY(3px);
+ box-shadow:0 1px 0 rgba(0,0,0,.2);
+}
+
+#btn-borrar{
+ background:#e53935;
+}
+
+#enviar-whatsapp{
+ background:#2e7d32;
+}
+
+.btn-eliminar{
+ background:#f44336;
+ color:white;
+ border:none;
+ border-radius:50%;
+ width:24px;
+ height:24px;
+ cursor:pointer;
+}
+
+</style>
+
 </head>
 
 <body>
@@ -15,58 +133,88 @@
 
   <header>
     <img src="logo.png" alt="Logo Alo Rico" class="logo">
+
     <h1>¿Qué comemos hoy?</h1>
+
     <img src="Repartidor.png" alt="Repartidor" class="icono">
   </header>
 
   <div class="botones">
 
     <!-- PIZZAS -->
+
     <a class="boton" href="https://alo-rico.github.io/pizza/">
+
       <div class="contenido-boton">
+
         <img src="pizza.png" class="miniatura">
+
         <div class="texto">
           <h3>🍕 Pizzas</h3>
           <p>Ver menú completo</p>
         </div>
+
       </div>
+
       <div class="arrow">›</div>
+
     </a>
 
     <!-- LOMITOS -->
+
     <a class="boton" href="https://alo-rico.github.io/lomitos/">
+
       <div class="contenido-boton">
+
         <img src="lomito.png" class="miniatura">
+
         <div class="texto">
           <h3>🥩 Lomitos</h3>
           <p>Especialidades</p>
         </div>
+
       </div>
+
       <div class="arrow">›</div>
+
     </a>
 
     <!-- HAMBURGUESAS -->
+
     <a class="boton" href="https://alo-rico.github.io/hamburguesa/">
+
       <div class="contenido-boton">
+
         <img src="hamburguesa.png" class="miniatura">
+
         <div class="texto">
           <h3>🍔 Hamburguesas</h3>
           <p>Clásicas y dobles</p>
         </div>
+
       </div>
+
       <div class="arrow">›</div>
+
     </a>
 
     <!-- BEBIDAS -->
+
     <a class="boton" href="https://alo-rico.github.io/bebidas/">
+
       <div class="contenido-boton">
+
         <img src="bebida.png" class="miniatura">
+
         <div class="texto">
           <h3>🥤 Bebidas</h3>
           <p>Frías y combos</p>
         </div>
+
       </div>
+
       <div class="arrow">›</div>
+
     </a>
 
   </div>
@@ -77,53 +225,206 @@
 
 </div>
 
-<!-- MENSAJE PEDIDO -->
-<div id="mensaje-pedido" style="display:none;">
-  📦 Tienes pedidos pendientes - Ver mis pedidos
+<!-- BOTON PEDIDO -->
+
+<div id="mensaje-pedido">
+  📦 Tienes pedidos pendientes - Ver mi pedido
 </div>
 
-<!-- 🔥 FIREBASE -->
+<!-- VENTANA PEDIDO -->
+
+<div id="pedido-flotante">
+
+  <h3>Mi Pedido</h3>
+
+  <ul id="lista-pedido"></ul>
+
+  <p id="total-pedido"></p>
+
+  <div class="acciones-pedido">
+
+    <button id="btn-borrar">
+      Borrar
+    </button>
+
+    <button id="enviar-whatsapp">
+      Enviar
+    </button>
+
+  </div>
+
+</div>
+
+<!-- FIREBASE -->
+
 <script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+
+import {
+ getDatabase,
+ ref,
+ onValue,
+ remove
+} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyADGYsqhbCFuKj2fXpontLpND_rtT7Nlno",
-  authDomain: "alorico-59754.firebaseapp.com",
-  databaseURL: "https://alorico-59754-default-rtdb.firebaseio.com",
-  projectId: "alorico-59754",
-  storageBucket: "alorico-59754.firebasestorage.app",
-  messagingSenderId: "120993494626",
-  appId: "1:120993494626:web:9f9cb0ad6fbfbd1abd033b"
+
+ apiKey: "AIzaSyADGYsqhbCFuKj2fXpontLpND_rtT7Nlno",
+
+ authDomain: "alorico-59754.firebaseapp.com",
+
+ databaseURL: "https://alorico-59754-default-rtdb.firebaseio.com",
+
+ projectId: "alorico-59754",
+
+ storageBucket: "alorico-59754.firebasestorage.app",
+
+ messagingSenderId: "120993494626",
+
+ appId: "1:120993494626:web:9f9cb0ad6fbfbd1abd033b"
 };
 
 const app = initializeApp(firebaseConfig);
+
 const db = getDatabase(app);
 
-// 🔑 ID cliente compartido
-let clienteId = localStorage.getItem("clienteId");
-if (!clienteId) {
-  clienteId = "cliente_" + Date.now();
-  localStorage.setItem("clienteId", clienteId);
+/* CLIENTE */
+
+let clienteId =
+localStorage.getItem("clienteId");
+
+if(!clienteId){
+
+ clienteId = "cliente_" + Date.now();
+
+ localStorage.setItem("clienteId",clienteId);
 }
 
-const pedidoRef = ref(db, "pedidos/" + clienteId);
+const pedidoRef =
+ref(db,"pedidos/" + clienteId);
 
-// 🔥 ESCUCHAR PEDIDO GLOBAL
-onValue(pedidoRef, (snapshot) => {
-  const data = snapshot.val();
-  const mensaje = document.getElementById("mensaje-pedido");
+/* ELEMENTOS */
 
-  if (data) {
-    mensaje.style.display = "block";
-  } else {
-    mensaje.style.display = "none";
-  }
+const mensaje =
+document.getElementById("mensaje-pedido");
+
+const pedidoFlotante =
+document.getElementById("pedido-flotante");
+
+const listaPedido =
+document.getElementById("lista-pedido");
+
+const totalPedido =
+document.getElementById("total-pedido");
+
+/* ESCUCHAR PEDIDOS */
+
+onValue(pedidoRef,(snapshot)=>{
+
+ const data = snapshot.val();
+
+ listaPedido.innerHTML = "";
+
+ let total = 0;
+
+ if(data){
+
+  mensaje.style.display = "block";
+
+  Object.entries(data).forEach(([key,p])=>{
+
+   total += p.precio * p.cantidad;
+
+   const li =
+   document.createElement("li");
+
+   li.innerHTML = `
+    <span>${p.cantidad} x ${p.nombre}</span>
+
+    <button class="btn-eliminar">
+      🗑
+    </button>
+   `;
+
+   li.querySelector("button").onclick = ()=>{
+
+    remove(
+      ref(db,"pedidos/" + clienteId + "/" + key)
+    );
+   };
+
+   listaPedido.appendChild(li);
+  });
+
+  totalPedido.innerText =
+  "Total: Gs. " + total.toLocaleString();
+
+ }else{
+
+  mensaje.style.display = "none";
+
+  pedidoFlotante.classList.remove("activo");
+ }
 });
 
-// 👉 IR A VER PEDIDO
-document.getElementById("mensaje-pedido").onclick = () => {
-  window.location.href = "https://alo-rico.github.io/lomitos/";
+/* ABRIR PEDIDO */
+
+mensaje.onclick = ()=>{
+
+ pedidoFlotante.classList.toggle("activo");
+
+ if(pedidoFlotante.classList.contains("activo")){
+
+  setTimeout(()=>{
+
+   pedidoFlotante.classList.remove("activo");
+
+  },7000);
+ }
+};
+
+/* BORRAR */
+
+document.getElementById("btn-borrar").onclick = ()=>{
+
+ remove(pedidoRef);
+};
+
+/* WHATSAPP */
+
+document.getElementById("enviar-whatsapp").onclick = ()=>{
+
+ onValue(pedidoRef,(snap)=>{
+
+  const data = snap.val();
+
+  if(!data){
+
+   alert("Sin pedido");
+
+   return;
+  }
+
+  let txt = "";
+
+  let total = 0;
+
+  Object.values(data).forEach(p=>{
+
+   txt += `- ${p.nombre} x${p.cantidad}%0A`;
+
+   total += p.precio * p.cantidad;
+  });
+
+  const msg =
+  `Hola envio mi pedido:%0A${txt}%0ATotal: Gs. ${total.toLocaleString()}`;
+
+  window.open(
+   `https://wa.me/+595971891251?text=${msg}`
+  );
+
+ },{onlyOnce:true});
 };
 
 </script>
